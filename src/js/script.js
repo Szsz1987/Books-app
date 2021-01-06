@@ -2,13 +2,14 @@
   'use strict';
 
   const select = {
+
     wrapper: {
       booksList: '.books-list', // h1 your collection, ul
       filters: '.filters', // <1section<form
     },
 
     templateOf: {
-      booksList: '#template-book', // book template <script id, type>
+      booksList: '#template-book',
     },
 
     class: {
@@ -17,9 +18,10 @@
     },
 
     book: {
-      bookImage: ''
+      bookImage: '',
+      currentBook: '.book__image[data-id="book.id"]',
     },
-  };
+  }; // const select
 
   const templates = {
     booksList: Handlebars.compile(document.querySelector(select.templateOf.booksList).innerHTML),
@@ -63,6 +65,7 @@
       const clickedElement = event.target.offsetParent;
       if(clickedElement.classList.contains('book__image')){ // book template, cover image
         const id = clickedElement.getAttribute('data-id');
+
         if(!clickedElement.classList.contains(select.class.favouriteBook)){
           favoriteBooks.push(id);
           clickedElement.classList.add(select.class.favouriteBook);
