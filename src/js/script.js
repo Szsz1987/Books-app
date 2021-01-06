@@ -37,26 +37,25 @@
   };
 
   const initActions = function(){
-    for(let book of allBooks){
-      const bookCover = book.querySelector('.book__image');
-      console.log(bookCover);
 
-      bookCover.addEventListener('dblclick', function(event){
-        event.preventDefault();
-        const id = bookCover.getAttribute('data-id');
-        if(!bookCover.classList.contains(select.class.favouriteBook)){
+    const booksList = document.querySelector('.books-list');
+    booksList.addEventListener('dblclick', function(event){
+      event.preventDefault();
+      const clickedElement = event.target;
+
+      if(clickedElement.classList.contains('book__image')){
+        const id = clickedElement.getAttribute('data-id');
+        if(!clickedElement.classList.contains(select.class.favouriteBook)){
           favoriteBooks.push(id);
-          bookCover.classList.add(select.class.favouriteBook);
-          console.log('dodalem ksiazke!');
+          clickedElement.classList.add(select.class.favouriteBook);
         } else {
           favoriteBooks.splice(favoriteBooks.indexOf(id), 1);
-          bookCover.classList.remove(select.class.favouriteBook);
+          clickedElement.classList.remove(select.class.favouriteBook);
         }
-        console.log('Favorite Books', favoriteBooks);
-      });
-    }
+      }
+    });
   };
-  console.log(allBooks);
+
   render();
   initActions();
 }
